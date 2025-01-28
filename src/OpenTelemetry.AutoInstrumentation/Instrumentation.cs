@@ -70,6 +70,13 @@ internal static class Instrumentation
     /// </summary>
     public static void Initialize()
     {
+        string value = Environment.GetEnvironmentVariable("Force_Sleep") ?? string.Empty;
+        if (!string.IsNullOrEmpty(value) &&
+            string.Equals(value, "true", StringComparison.OrdinalIgnoreCase))
+        {
+            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(30));
+        }
+
         if (Interlocked.Exchange(ref _initialized, value: 1) != 0)
         {
             // Initialize() was already called before
@@ -138,6 +145,8 @@ internal static class Instrumentation
                         .UseEnvironmentVariables(LazyInstrumentationLoader, TracerSettings.Value, _pluginManager)
                         .InvokePluginsAfter(_pluginManager);
 
+                    // xyxyxy private code to enable aws sdk instrumentation.
+                    builder.AddAWSInstrumentation();
                     _tracerProvider = builder.Build();
                     _tracerProvider.TryCallInitialized(_pluginManager);
                     Logger.Information("OpenTelemetry tracer initialized.");

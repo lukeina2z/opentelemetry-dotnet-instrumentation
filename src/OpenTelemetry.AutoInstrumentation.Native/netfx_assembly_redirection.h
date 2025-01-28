@@ -18,6 +18,9 @@ void CorProfiler::InitNetFxAssemblyRedirectsMap()
     const USHORT auto_major = atoi(AUTO_MAJOR);
 
     assembly_version_redirect_map_.insert({
+        { L"AWSSDK.Core", {4, 0, 0, 0} },
+        { L"AWSSDK.SimpleNotificationService", {4, 0, 0, 0} },
+        { L"AWSSDK.SQS", {4, 0, 0, 0} },
         { L"Microsoft.Bcl.AsyncInterfaces", {9, 0, 0, 8} },
         { L"Microsoft.Extensions.Configuration", {9, 0, 0, 8} },
         { L"Microsoft.Extensions.Configuration.Abstractions", {9, 0, 0, 8} },
@@ -40,9 +43,11 @@ void CorProfiler::InitNetFxAssemblyRedirectsMap()
         { L"OpenTelemetry.Exporter.OpenTelemetryProtocol", {1, 0, 0, 0} },
         { L"OpenTelemetry.Exporter.Prometheus.HttpListener", {1, 0, 0, 0} },
         { L"OpenTelemetry.Exporter.Zipkin", {1, 0, 0, 0} },
+        { L"OpenTelemetry.Extensions.AWS", {1, 12, 0, 498} },
         { L"OpenTelemetry.Extensions.Propagators", {1, 0, 0, 0} },
         { L"OpenTelemetry.Instrumentation.AspNet", {1, 12, 0, 489} },
         { L"OpenTelemetry.Instrumentation.AspNet.TelemetryHttpModule", {1, 12, 0, 489} },
+        { L"OpenTelemetry.Instrumentation.AWS", {1, 12, 0, 498} },
         { L"OpenTelemetry.Instrumentation.GrpcNetClient", {1, 12, 0, 492} },
         { L"OpenTelemetry.Instrumentation.Http", {1, 12, 0, 493} },
         { L"OpenTelemetry.Instrumentation.Process", {1, 12, 0, 494} },
@@ -50,6 +55,7 @@ void CorProfiler::InitNetFxAssemblyRedirectsMap()
         { L"OpenTelemetry.Instrumentation.Runtime", {1, 12, 0, 496} },
         { L"OpenTelemetry.Instrumentation.SqlClient", {1, 12, 0, 582} },
         { L"OpenTelemetry.Instrumentation.Wcf", {1, 12, 0, 500} },
+        { L"OpenTelemetry.Resources.AWS", {1, 11, 1, 422} },
         { L"OpenTelemetry.Resources.Azure", {1, 12, 0, 501} },
         { L"OpenTelemetry.Resources.Host", {1, 12, 0, 503} },
         { L"OpenTelemetry.Resources.OperatingSystem", {1, 12, 0, 504} },

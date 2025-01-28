@@ -9,13 +9,13 @@ partial class Build : NukeBuild
     public static int Main() => Execute<Build>(x => x.BuildTracer);
 
     [Parameter("Configuration to build. Default is 'Release'")]
-    readonly Configuration BuildConfiguration = Configuration.Release;
+    readonly Configuration BuildConfiguration = Configuration.Debug;
 
     [Parameter("Platform to build - x86, x64, ARM64. Default is current architecture.")]
     readonly MSBuildTargetPlatform Platform = GetDefaultTargetPlatform();
 
     [Parameter($"Docker containers type to be used in tests. One of '{ContainersNone}', '{ContainersLinux}', '{ContainersWindows}', '{ContainersWindowsOnly}'. Default is '{ContainersLinux}'")]
-    readonly string Containers = ContainersLinux;
+    readonly string Containers = ContainersNone;
 
     [Parameter("TargetFramework to be tested. Default is empty, meaning all TFMs supported by each test")]
     readonly TargetFramework TestTargetFramework = TargetFramework.NOT_SPECIFIED;

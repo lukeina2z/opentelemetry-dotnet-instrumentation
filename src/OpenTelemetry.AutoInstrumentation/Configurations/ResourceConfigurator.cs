@@ -38,6 +38,9 @@ internal static class ResourceConfigurator
             };
         }
 
+        // xyxyxy private code to enable aws resource detector.
+        // AWS SDK v3 user cannot get trace if this resource detector enabled.
+        resourceBuilder.AddAWSEC2Detector();
         var resource = resourceBuilder.Build();
         if (!resource.Attributes.Any(kvp => kvp.Key == ServiceNameAttribute))
         {
