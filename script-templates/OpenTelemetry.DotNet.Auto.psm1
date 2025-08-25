@@ -343,7 +343,7 @@ function Install-OpenTelemetryCore() {
         [bool]$RegisterAssembliesInGAC = $true
     )
 
-    $version = "v{{VERSION}}"
+    $version = "v1.12.0"
     $installDir = Get-CLIInstallDir-From-InstallDir $InstallDir
     $archivePath = $null
     $deleteArchive = $true
@@ -362,7 +362,7 @@ function Install-OpenTelemetryCore() {
         Expand-Archive $archivePath $installDir -Force
 
         # OpenTelemetry service locator
-        [System.Environment]::SetEnvironmentVariable($ServiceLocatorVariable, $installDir, [System.EnvironmentVariableTarget]::Machine)
+        [System.Environment]::SetEnvironmentVariable($ServiceLocatorVariable, $installDir, [System.EnvironmentVariableTarget]::Process)
 
         if ($RegisterAssembliesInGAC){
             Register-AssembliesInGAC $installDir
