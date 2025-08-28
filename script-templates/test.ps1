@@ -1,16 +1,26 @@
 
 Import-Module "$PSScriptRoot\OpenTelemetry.DotNet.Auto.psm1" -Force
 
-# MyFunctionFromFoo -Param1 "value"
-
-Write-Host "Testing Install-OpenTelemetryCore..."
+Write-Host "Run OTel PowerShell Script..."
 
 # Install-OpenTelemetryCore -InstallDir "D:\otel-dotnet-profiler-installRoot" # -LocalPath "d:\"
-$env:OTEL_DOTNET_AUTO_INSTALL_DIR = "D:\otel-dotnet-profiler-installRoot"
 
-# Set up your Windows Service instrumentation
-Register-OpenTelemetryForWindowsService -WindowsServiceName "W3Svc" -OTelServiceName "otel-w3svc-svc-test"
+$env:OTEL_DOTNET_AUTO_INSTALL_DIR = "D:/Users/lukezha/github/otel-dotnet/opentelemetry-dotnet-instrumentation/bin/tracer-home"
 
-UnRegister-OpenTelemetryForWindowsService -WindowsServiceName "W3Svc"
 
-Write-Host "Done."
+# Register-OpenTelemetryForWindowsService -WindowsServiceName "W3Svc" -OTelServiceName "otel-w3svc-svc-test"
+# UnRegister-OpenTelemetryForWindowsService -WindowsServiceName "W3Svc"
+
+Register-OpenTelemetryForCurrentSession -OTelServiceName "xxyy-OTel-Dotnet-Bar"
+
+Write-Host "End"
+
+cmd /c set ASPNET
+cmd /c set CORECLR_
+cmd /c set COR_
+cmd /c set DOTNET_
+cmd /c set OTEL_
+
+
+
+
