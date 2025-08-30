@@ -3,14 +3,19 @@
 
 #if NETFRAMEWORK
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using OpenTelemetry.AutoInstrumentation.Logging;
 
 namespace OpenTelemetry.AutoInstrumentation.Loader;
 
 /// <summary>
 /// A class that attempts to load the OpenTelemetry.AutoInstrumentation .NET assembly.
 /// </summary>
-internal partial class Loader
+/// [ToDo]: Change file name in the next PR.
+[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:FileNameMustMatchTypeName", Justification = "Needed for special file naming.")]
+[SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202:ElementsMustBeOrderedByAccess", Justification = "Deliberate ordering for readability.")]
+internal partial class AssemblyResolver
 {
     private static string ResolveManagedProfilerDirectory()
     {
@@ -19,7 +24,7 @@ internal partial class Loader
         return Path.Combine(tracerHomeDirectory, tracerFrameworkDirectory);
     }
 
-    private static Assembly? AssemblyResolve_ManagedProfilerDependencies(object sender, ResolveEventArgs args)
+    internal static Assembly? AssemblyResolve_ManagedProfilerDependencies(object sender, ResolveEventArgs args)
     {
         var assemblyName = new AssemblyName(args.Name).Name;
 

@@ -11,8 +11,6 @@ namespace OpenTelemetry.AutoInstrumentation.Loader;
 /// </summary>
 internal partial class Loader
 {
-    private static readonly string ManagedProfilerDirectory;
-
     private static readonly IOtelLogger Logger = OtelLogging.GetLogger("Loader");
 
     /// <summary>
@@ -21,11 +19,16 @@ internal partial class Loader
     /// </summary>
     static Loader()
     {
-        ManagedProfilerDirectory = ResolveManagedProfilerDirectory();
+        string value = Environment.GetEnvironmentVariable("Force_Sleep") ?? string.Empty;
+        if (!string.IsNullOrEmpty(value) &&
+            string.Equals(value, "true", StringComparison.OrdinalIgnoreCase))
+        {
+            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(30));
+        }
 
         try
         {
-            AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolve_ManagedProfilerDependencies;
+            AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolver.AssemblyResolve_ManagedProfilerDependencies;
         }
         catch (Exception ex)
         {
@@ -66,19 +69,5 @@ internal partial class Loader
             Logger.Error(ex, "Error when loading managed assemblies. {0}", ex.Message);
             throw;
         }
-    }
-
-    private static string? ReadEnvironmentVariable(string key)
-    {
-        try
-        {
-            return Environment.GetEnvironmentVariable(key);
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex, "Error while loading environment variable {0}", key);
-        }
-
-        return null;
     }
 }
