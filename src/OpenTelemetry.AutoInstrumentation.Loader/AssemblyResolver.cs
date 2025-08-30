@@ -7,17 +7,17 @@ using OpenTelemetry.AutoInstrumentation.Logging;
 namespace OpenTelemetry.AutoInstrumentation.Loader;
 
 /// <summary>
-/// A class that attempts to load the OpenTelemetry.AutoInstrumentation .NET assembly.
+/// A class that help Loader to load the OpenTelemetry.AutoInstrumentation .NET assembly.
 /// </summary>
 internal partial class AssemblyResolver
 {
-    private static readonly string ManagedProfilerDirectory;
+    private const string AssemblyResolverLoggerSuffix = "AssemblyResolver";
+    private static readonly IOtelLogger Logger = OtelLogging.GetLogger(AssemblyResolverLoggerSuffix);
 
-    private static readonly IOtelLogger Logger = OtelLogging.GetLogger("Loader");
+    private static readonly string ManagedProfilerDirectory;
 
     /// <summary>
     /// Initializes static members of the <see cref="AssemblyResolver"/> class.
-    /// This method also attempts to load the OpenTelemetry.AutoInstrumentation .NET assembly.
     /// </summary>
     static AssemblyResolver()
     {

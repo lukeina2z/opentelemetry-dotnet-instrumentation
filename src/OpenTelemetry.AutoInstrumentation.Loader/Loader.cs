@@ -11,7 +11,8 @@ namespace OpenTelemetry.AutoInstrumentation.Loader;
 /// </summary>
 internal partial class Loader
 {
-    private static readonly IOtelLogger Logger = OtelLogging.GetLogger("Loader");
+    private const string LoaderLoggerSuffix = "Loader";
+    private static readonly IOtelLogger Logger = OtelLogging.GetLogger(LoaderLoggerSuffix);
 
     /// <summary>
     /// Initializes static members of the <see cref="Loader"/> class.
@@ -19,13 +20,6 @@ internal partial class Loader
     /// </summary>
     static Loader()
     {
-        string value = Environment.GetEnvironmentVariable("Force_Sleep") ?? string.Empty;
-        if (!string.IsNullOrEmpty(value) &&
-            string.Equals(value, "true", StringComparison.OrdinalIgnoreCase))
-        {
-            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(30));
-        }
-
         try
         {
             AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolver.AssemblyResolve_ManagedProfilerDependencies;
