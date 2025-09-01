@@ -138,6 +138,8 @@ internal static class Instrumentation
                         .UseEnvironmentVariables(LazyInstrumentationLoader, TracerSettings.Value, _pluginManager)
                         .InvokePluginsAfter(_pluginManager);
 
+                    // xyxyxy private code to enable aws sdk instrumentation.
+                    builder.AddAWSInstrumentation();
                     _tracerProvider = builder.Build();
                     _tracerProvider.TryCallInitialized(_pluginManager);
                     Logger.Information("OpenTelemetry tracer initialized.");
