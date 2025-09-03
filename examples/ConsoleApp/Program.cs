@@ -1,9 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-
 using System.Threading.Tasks;
 using ConsoleApp;
 
-await MyProgram.Main(args);
+await MyProgram.Foo();
 
 class MyProgram
 {
@@ -28,11 +26,4 @@ class MyProgram
 
         Console.WriteLine("\n");
     }
-
-    internal static async Task Main(string[] args)
-    {
-        await Foo();
-    }
 }
-
-
